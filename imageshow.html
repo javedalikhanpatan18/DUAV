@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Display</title>
+    <script>
+        function refreshImage() {
+            var img = new Image();
+            img.onload = function() {
+                document.getElementById('image').src = img.src;
+            };
+            var timestamp = new Date().getTime(); // Add timestamp to ensure the image is reloaded
+            img.src = "frameVid.jpg?" + timestamp;
+        }
+        setInterval(refreshImage, 100); // Refresh every 0.1 second (100 milliseconds)
+    </script>
+</head>
+<body>
+    <center><h1>Search and Rescue: Mission Control</h1></center>
+    <center><img id="image" src="frameVid.jpg" alt="Your Image"></center>
+</body>
+</html>
+
