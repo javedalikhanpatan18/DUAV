@@ -8,10 +8,10 @@ Created on Thu May  9 15:50:48 2024
 
 import cv2
 import cv2.aruco as aruco
-from servo import dropLoad
+#from servo import dropLoad
 VideoCap = False
 cap = cv2.VideoCapture(0)
-
+drop=0
 def findAruco(img, marker_size=6, total_markers=250, draw=True):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     key = getattr(aruco, f'DICT_{marker_size}X{marker_size}_{total_markers}')
@@ -24,10 +24,10 @@ def findAruco(img, marker_size=6, total_markers=250, draw=True):
         for id in ids:
            print(id[0])  # Print each ID
            if id[0] == 69:
-                dropLoad()
+                #dropLoad()
                 print("Payload Drop Sucessful!")
                 exit(0)
-		
+           break
 
     else:
         print("No markers detected")
@@ -43,8 +43,11 @@ while True:
         break
 
     bbox,ids=findAruco(img)
+    if drop==1:
+        break
     if cv2.waitKey(1)==113:
         break
-    #cv2.imshow("img",img)
+    cv2.imshow("img",img)
+    cv2.imwrite("frameVid.jpg", img)
     
     
