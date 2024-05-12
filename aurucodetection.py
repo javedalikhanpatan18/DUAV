@@ -23,10 +23,10 @@ def findAruco(img, marker_size=6, total_markers=250, draw=True):
     if ids is not None:
         for id in ids:
            print(id[0])  # Print each ID
-           if id[0] == 69:
-                #dropLoad()
+           if id[0] == 69 and drop==0:
+                dropLoad()
                 print("Payload Drop Sucessful!")
-                exit(0)
+                drop=1
            break
 
     else:
@@ -42,7 +42,7 @@ while True:
         print("Error: Failed to capture frame from the camera.")
         break
 
-    bbox,ids=findAruco(img)
+    bbox,ids,drop=findAruco(img,drop)
     if drop==1:
         break
     if cv2.waitKey(1)==113:
