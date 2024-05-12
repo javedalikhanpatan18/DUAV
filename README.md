@@ -1,1 +1,1 @@
-# DUAV
+# Dassault Aviation UAV Challenge
