@@ -8,7 +8,7 @@ Created on Thu May  9 15:50:48 2024
 
 import cv2
 import cv2.aruco as aruco
-#from servo import dropLoad
+from servo import dropLoad
 VideoCap = False
 cap = cv2.VideoCapture(0)
 drop=0
