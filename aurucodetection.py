@@ -12,7 +12,8 @@ import cv2.aruco as aruco
 VideoCap = False
 cap = cv2.VideoCapture(0)
 drop=0
-def findAruco(img, marker_size=6, total_markers=250, draw=True):
+im_count=0
+def findAruco(img,drop, marker_size=6, total_markers=250, draw=True):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     #key = getattr(aruco, f'DICT_{marker_size}X{marker_size}_{total_markers}')
     arucoDict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_4X4_1000)
@@ -34,7 +35,7 @@ def findAruco(img, marker_size=6, total_markers=250, draw=True):
         
     if draw:
     	aruco.drawDetectedMarkers(img,bbox,ids)
-    return bbox,ids
+    return bbox,ids,drop
 
 while True:
     _,img=cap.read()
@@ -46,6 +47,9 @@ while True:
     if cv2.waitKey(1)==113:
         break
     #cv2.imshow("img",img)
-    cv2.imwrite("frameVid.jpg", img)
+    name=str(im_count)+'data.jpg'
+    cv2.imwrite(name,img)
+    im_count +=1
+    cv2.imwrite("/var/www/html/frameVid.jpg", img)
     
     
