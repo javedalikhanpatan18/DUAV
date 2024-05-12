@@ -14,7 +14,7 @@ cap = cv2.VideoCapture(0)
 drop=0
 def findAruco(img, marker_size=6, total_markers=250, draw=True):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    key = getattr(aruco, f'DICT_{marker_size}X{marker_size}_{total_markers}')
+    #key = getattr(aruco, f'DICT_{marker_size}X{marker_size}_{total_markers}')
     arucoDict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_4X4_1000)
     #arucoDict = cv2.aruco.Dictionary_get(key)
     arucoParam = aruco.DetectorParameters_create()
@@ -43,11 +43,9 @@ while True:
         break
 
     bbox,ids,drop=findAruco(img,drop)
-    if drop==1:
-        break
     if cv2.waitKey(1)==113:
         break
-    cv2.imshow("img",img)
+    #cv2.imshow("img",img)
     cv2.imwrite("frameVid.jpg", img)
     
     
