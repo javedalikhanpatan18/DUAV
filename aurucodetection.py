@@ -13,6 +13,8 @@ VideoCap = False
 cap = cv2.VideoCapture(0)
 drop=0
 im_count=0
+fourcc = cv2.VideoWriter_fourcc(*'XVID')
+out = cv2.VideoWriter('output.avi', fourcc, 20.0, (640, 480))
 def findAruco(img,drop, marker_size=6, total_markers=250, draw=True):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     #key = getattr(aruco, f'DICT_{marker_size}X{marker_size}_{total_markers}')
@@ -47,9 +49,10 @@ while True:
     if cv2.waitKey(1)==113:
         break
     #cv2.imshow("img",img)
-    name=str(im_count)+'data.jpg'
-    cv2.imwrite(name,img)
+    #name=str(im_count)+'data.jpg'
+    #cv2.imwrite(name,img)
     im_count +=1
+    out.write(img)
     cv2.imwrite("/var/www/html/frameVid.jpg", img)
     
     
